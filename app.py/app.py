@@ -1,6 +1,9 @@
 import os
 
-restaurantes = ['Pizza','NAM'] #Lista de nomes de restaurantes
+restaurantes = [{'nome':'restaurante NAM','categoria':'Alimento','ativo':False},
+                {'nome':'Santa','categoria':'carne','ativo':True},
+                {'nome':'CWB','categoria':'Sushi','ativo':False}
+                ] #Lista de nomes de restaurantes
 
 def exibir_nome_do_programa():
     print(""" NAM = 
@@ -12,7 +15,7 @@ def exibir_opcoes():
     print('4. Sair')
 
 def finaliza_app():
-    exibir_subtitulo('Finalizar Bagulho')
+    exibir_subtitulo('Finalizar app')
 
 def voltar_ao_menu_principal():
     input('\n Digite a tecla "Enter" para voltar ao menu principal')    
@@ -23,27 +26,31 @@ def opcao_invalida():
     voltar_ao_menu_principal()
 
 def exibir_subtitulo(texto):
-    os.system('clear')
-    print(texto)
-    print()
-
-def exibir_subtitulo(texto):
-    os.system('clear')
-    print(texto)
-    print()
+     os.system('clear')
+     linha = '=' * (len(texto))
+     print(linha)
+     print(texto)
+     print(linha)
+     print()
 
 def cadastrar_novo_restaurante():
-   exibir_subtitulo('Cadastro do novorestaurante: ')
-   nome_do_restaurante  = input('Digite o nome do restaurante')
-   restaurantes.append(nome_do_restaurante)
+   exibir_subtitulo('Cadastro do novo restaurante: ')
+   nome_do_restaurante  = input('Digite o nome do restaurante: ')
+   categoria = input(f'Digite a categoria do restaurante{nome_do_restaurante}: ')
+   dado_do_restaurante ={'nome':nome_do_restaurante,'categoria':categoria,'ativo':False}
+   restaurantes.append(dado_do_restaurante)
    print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
-   voltar_ao_menu_principal()  
+   voltar_ao_menu_principal()
 
 def listar_restaurante():
     exibir_subtitulo('Listando os restaurantes: ')
 
+    print(f'{"Nome do restaurante".ljust(22)} | {"Categoria".ljust(20)} | Status')
     for restaurante in restaurantes:
-        print(f'*{restaurante}')
+        nome_restaurante = restaurante['nome']
+        categoria = restaurante['categoria']
+        ativo = 'ativado' if restaurante['ativo'] else 'desativado'
+        print(f'- {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}')
 
     voltar_ao_menu_principal()
 
